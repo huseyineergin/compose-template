@@ -72,9 +72,7 @@ vim .env
 - `DATABASE_URI`
 - `ADDON_PROXY` (Optional)
 
-When using PostgreSQL for AIOStreams’ database, set `POSTGRES_PASSWORD`, `POSTGRES_USER`, and `POSTGRES_DB`.
-
-> **Note:** When NOT using PostgreSQL for AIOStreams’ database, comment out the PostgreSQL related entries in `apps/aiostreams/compose.yaml` file.
+When using PostgreSQL for AIOStreams’ database, set `POSTGRES_PASSWORD`, `POSTGRES_USER`, and `POSTGRES_DB`. Also, uncomment the PostgreSQL related entries in `apps/aiostreams/compose.yaml` file.
 
 7\. Set the following values in the `apps/authelia/.env` file:
 - `POSTGRES_PASSWORD`

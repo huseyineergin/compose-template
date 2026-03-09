@@ -1,6 +1,6 @@
 services:
   aiostreams:
-    image: viren070/aiostreams:v2.23.0
+    image: viren070/aiostreams:latest
     container_name: aiostreams
     user: "${PUID}:${PGID}"
     expose:
@@ -15,32 +15,32 @@ services:
       - "traefik.http.routers.aiostreams.middlewares=authelia@docker"
     volumes:
       - ${DOCKER_DATA_DIR}/aiostreams/data:/app/data
-    depends_on:
-      aiostreams-postgres:
-        condition: service_healthy
+    # depends_on:
+    #   aiostreams-postgres:
+    #     condition: service_healthy
     profiles:
       - aiostreams
       - all
     restart: unless-stopped
 
-  aiostreams-postgres:
-    image: postgres:18-alpine
-    container_name: aiostreams-postgres
-    user: "${PUID}:${PGID}"
-    expose:
-      - 5432
-    env_file:
-      - .env
-    volumes:
-      - ${DOCKER_DATA_DIR}/aiostreams/db:/var/lib/postgresql
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
-      start_interval: 5s
-    profiles:
-      - aiostreams
-      - all
-    restart: unless-stopped
+  # aiostreams-postgres:
+  #   image: postgres:18-alpine
+  #   container_name: aiostreams-postgres
+  #   user: "${PUID}:${PGID}"
+  #   expose:
+  #     - 5432
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - ${DOCKER_DATA_DIR}/aiostreams/db:/var/lib/postgresql
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+  #     interval: 30s
+  #     timeout: 5s
+  #     retries: 3
+  #     start_period: 30s
+  #     start_interval: 5s
+  #   profiles:
+  #     - aiostreams
+  #     - all
+  #   restart: unless-stopped
